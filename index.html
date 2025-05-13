@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge AI | IoT Agents</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/sensationalspace/sensationalspace.github.io/main/logo3.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Raleway:wght@300;400;500&display=swap">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary-color: #330066;
+            --accent-color: #3B81F6;
+            --text-color: #ffffff;
+            --secondary-text: #c0c0c0;
+            --transition-speed: 0.4s;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-image {
+            background-image: url('https://raw.githubusercontent.com/sensationalspace/sensationalspace.github.io/main/sensational_As_your_journey_into_the_depths_of_edge_computing_c_f12e5d68-90f1-4b1c-9efe-abac11ca6d2f.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            animation: subtle-zoom 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes subtle-zoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        .dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.5s ease;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(51, 0, 102, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 1rem 5%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 60px;
+            transition: transform var(--transition-speed);
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all var(--transition-speed);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main content */
+        .main-content {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fade-in 1.2s ease forwards;
+        }
+
+        @keyframes fade-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Raleway', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ffffff, #3B81F6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0px 2px 15px rgba(255, 255, 255, 0.2);
+            animation: color-shift 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes color-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Features section */
+        .features {
+            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(51, 0, 102, 0.95));
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 129, 246, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-desc {
+            color: var(--secondary-text);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 100;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copyright {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .logo {
+                height: 50px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.8rem;
+            }
+
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .social-links {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Mobile menu button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fade-in 1s ease forwards 1.5s;
+        }
+
+        .scroll-text {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--secondary-text);
+        }
+
+        .scroll-icon {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Chatbot button styling to match site design */
+        .flowise-embedded-bot-button {
+            border-radius: 50% !important;
+            box-shadow: 0 5px 20px rgba(59, 129, 246, 0.5) !important;
+            transform: scale(1);
+            transition: transform 0.3s ease !important;
+        }
+        
+        .flowise-embedded-bot-button:hover {
+            transform: scale(1.1) !important;
+        }
+
+        /* For demo purposes - placeholder for the real chatbot */
+        .chatbot-placeholder {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #3B81F6, #8B5CF6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(59, 129, 246, 0.5);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .chatbot-placeholder:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-placeholder i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Custom Chat Window Styles */
+        .chat-window {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #3B81F6, #8B5CF6);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .close-chat:hover {
+            opacity: 1;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            animation: message-pop 0.3s ease;
+        }
+
+        @keyframes message-pop {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .bot-message {
+            background: #e9ecef;
+            color: #303235;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: #3B81F6;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .chat-footer {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            background: #f8f9fa;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #3B81F6;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #3B81F6, #8B5CF6);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .chat-window {
+                width: 90%;
+                height: 70%;
+                bottom: 10px;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-wrapper">
+        <div class="background-image"></div>
+        <div class="dark-overlay"></div>
+    </div>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/sensationalspace/sensationalspace.github.io/main/logo3.png" alt="Edge AI Logo" class="logo">
+        </div>
+        <nav class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#technology">Technology</a>
+        </nav>
+        <button class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <section class="main-content">
+        <div class="hero-content">
+            <h1 class="hero-title">Edge AI</h1>
+            <h2 class="hero-subtitle">IoT Agents</h2>
+            <p class="hero-tagline">Real World Intelligence</p>
+        </div>
+        <div class="scroll-indicator">
+            <span class="scroll-text">SCROLL DOWN</span>
+            <i class="fas fa-chevron-down scroll-icon"></i>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="features-container">
+            <div class="feature-card">
+                <i class="fas fa-microchip feature-icon"></i>
+                <h3 class="feature-title">Smart Devices</h3>
+                <p class="feature-desc">Our IoT agents power intelligent devices that seamlessly interact with your environment, collecting data and executing commands with precision.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-brain feature-icon"></i>
+                <h3 class="feature-title">Intelligent Processing</h3>
+                <p class="feature-desc">Advanced AI algorithms transform raw data into actionable insights, enabling smart decision-making at the edge of your network.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-city feature-icon"></i>
+                <h3 class="feature-title">Connected Cities</h3>
+                <p class="feature-desc">From smart thermostats to city-wide infrastructure, our IoT agents create interconnected systems that improve efficiency and quality of life.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <ul class="social-links">
+                <li><a href="https://github.com/sensationalspace" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+                <li><a href="https://twitter.com/SpaceSensation" target="_blank" aria-label="Twitter"><i class="fas fa-times"></i></a></li>
+                <li><a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+            <div class="copyright">© 2025 Edge AI. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Custom chatbot integration -->
+    <div class="chatbot-placeholder" id="chatbot-trigger">
+        <i class="fas fa-comment"></i>
+    </div>
+    
+    <div class="chat-window" id="chat-window" style="display: none;">
+        <div class="chat-header">
+            <span>Edge AI Agent</span>
+            <button class="close-chat" id="close-chat">×</button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="message bot-message">Hello! How can I help you understand Edge AI and IoT Agents?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Chat window functionality
+        const chatTrigger = document.getElementById('chatbot-trigger');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const chatBody = document.getElementById('chat-body');
+
+        chatTrigger.addEventListener('click', () => {
+            chatWindow.style.display = 'flex';
+            chatTrigger.style.display = 'none';
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.style.display = 'none';
+            chatTrigger.style.display = 'flex';
+        });
+
+        // Edge AI API integration
+        async function query(data) {
+            const response = await fetch(
+                "https://app.sensational-ai.space/api/v1/prediction/ab4924ed-4a06-40ff-9f8f-e897ef52fd8a",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }
+            );
+            const result = await response.json();
+            return result;
+        }
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('message', 'user-message');
+            userDiv.textContent = message;
+            chatBody.appendChild(userDiv);
+
+            // Clear input
+            chatInput.value = '';
+
+            // Show loading
+            const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('message', 'bot-message', 'loading');
+            loadingDiv.innerHTML = '<span class="loading-dots"></span>';
+            chatBody.appendChild(loadingDiv);
+
+            // Scroll to bottom
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            try {
+                // Send to API
+                const response = await query({
+                    "question": message,
+                    "overrideConfig": {
+                        "supervisorName": "Edge AI Assistant",
+                        "supervisorPrompt": "You are a helpful AI assistant for Edge AI, specializing in IoT Agents and edge computing. Keep responses concise and informative.",
+                        "summarization": true,
+                        "recursionLimit": 1,
+                    }
+                });
+
+                // Remove loading
+                loadingDiv.remove();
+
+                // Add bot response
+                const botDiv = document.createElement('div');
+                botDiv.classList.add('message', 'bot-message');
+                botDiv.textContent = response.text || response.answer || "I'm sorry, I couldn't generate a response.";
+                chatBody.appendChild(botDiv);
+
+            } catch (error) {
+                loadingDiv.remove();
+                const errorDiv = document.createElement('div');
+                errorDiv.classList.add('message', 'bot-message');
+                errorDiv.textContent = "Sorry, I'm having trouble connecting. Please try again later.";
+                chatBody.appendChild(errorDiv);
+            }
+
+            // Scroll to bottom
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Add scroll effect for navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
