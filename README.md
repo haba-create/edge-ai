@@ -1,15 +1,16 @@
 # Edge AI Website
 
-A modern, responsive website for Edge AI highlighting open source models running on edge devices like Raspberry Pi 5. These agent-driven models manage and secure your environment through reasoning.
+A modern, responsive website for Edge AI featuring heavily fine-tuned Llama and DeepSeek models that run on edge devices such as Raspberry Pi 5. These agent-driven models manage and secure your environment through reasoning.
 
 ## Features
 
 - **Modern Design**: Clean, futuristic design with animated background and smooth transitions
+- **Earth from Space Background**: Custom SVG background of our planet at night
 - **Responsive Layout**: Mobile-friendly design that adapts to different screen sizes
 - **Interactive Elements**: Animated navigation bar, hover effects, and smooth scrolling
 - **AI Chatbot Integration**: Integrated chat interface connected to Edge AI API
 - **Optimized Performance**: Fast loading with optimized assets and animations
-- **Open Source Models**: Runs on Raspberry Pi 5 for on-device reasoning and secure automation
+- **Fine-Tuned Models**: Leveraging heavily tuned Llama and DeepSeek models on devices like Raspberry Pi 5
 
 ## Technologies Used
 
@@ -68,8 +69,8 @@ To modify the chatbot behavior, update the configuration in the `query()` functi
 Update the CSS variables in the `:root` selector:
 ```css
 :root {
-    --primary-color: #330066;    /* Deep purple background */
-    --accent-color: #3B81F6;     /* Blue accent color */
+    --primary-color: #000428;    /* Deep navy background */
+    --accent-color: #4facfe;     /* Sky blue accent */
     --text-color: #ffffff;       /* White text */
     --secondary-text: #c0c0c0;   /* Light gray text */
 }
