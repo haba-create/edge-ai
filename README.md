@@ -1,6 +1,6 @@
 # Edge AI Website
 
-A modern, responsive website for Edge AI showcasing IoT Agents and real-world intelligence capabilities.
+A modern, responsive website for Edge AI highlighting open source models running on edge devices like Raspberry Pi 5. These agent-driven models manage and secure your environment through reasoning.
 
 ## Features
 
@@ -9,6 +9,7 @@ A modern, responsive website for Edge AI showcasing IoT Agents and real-world in
 - **Interactive Elements**: Animated navigation bar, hover effects, and smooth scrolling
 - **AI Chatbot Integration**: Integrated chat interface connected to Edge AI API
 - **Optimized Performance**: Fast loading with optimized assets and animations
+- **Open Source Models**: Runs on Raspberry Pi 5 for on-device reasoning and secure automation
 
 ## Technologies Used
 
