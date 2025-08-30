@@ -1,16 +1,25 @@
-# Edge AI Website
+# Edge AI - Spatial Intelligence at the Edge
 
-A modern, responsive website for Edge AI featuring heavily fine-tuned Llama and DeepSeek models that run on edge devices such as Raspberry Pi 5. These agent-driven models manage and secure your environment through reasoning.
+A cutting-edge website for Edge AI, a startup pioneering spatial computing solutions that run AI locally on edge devices. Our platform processes sensor data and controls actuators in real-time without internet dependency, enabling truly autonomous intelligent systems.
 
-## Features
+## 🚀 Overview
 
-- **Modern Design**: Clean, futuristic design with animated background and smooth transitions
-- **Earth from Space Background**: Custom SVG background of our planet at night
-- **Responsive Layout**: Mobile-friendly design that adapts to different screen sizes
-- **Interactive Elements**: Animated navigation bar, hover effects, and smooth scrolling
-- **AI Chatbot Integration**: Integrated chat interface connected to Edge AI API
-- **Optimized Performance**: Fast loading with optimized assets and animations
-- **Fine-Tuned Models**: Leveraging heavily tuned Llama and DeepSeek models on devices like Raspberry Pi 5
+Edge AI transforms physical spaces with autonomous AI that makes decisions where they matter most - directly on your devices. From industrial automation to smart buildings, we bring intelligence to the edge for instant, reliable, and secure operation.
+
+## ✨ Features
+
+### Design & User Experience
+- **Abstract Futuristic Design**: Dark theme with cyan/blue accents, animated grid backgrounds, and floating particles
+- **Glass Morphism UI**: Modern glassmorphic components with backdrop blur effects
+- **Smooth Animations**: Circuit line animations, gradient shifts, and scroll-triggered reveals
+- **Responsive Layout**: Fully optimized for desktop, tablet, and mobile devices
+- **Interactive Elements**: Hover effects, animated buttons, and dynamic content loading
+
+### Technical Capabilities Showcased
+- **Sensor Fusion**: Multi-modal perception from cameras, LiDAR, IMU, and environmental sensors
+- **Local AI Processing**: Sub-10ms inference with hardware acceleration
+- **Actuator Control**: Direct control of motors, servos, and IoT devices
+- **Offline Operation**: Complete autonomy without cloud dependency
 
 ## Technologies Used
 
